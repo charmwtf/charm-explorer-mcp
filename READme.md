@@ -54,7 +54,7 @@ A [Model Context Protocol](https://modelcontextprotocol.io/) server that bridges
 Clone the repo and (optionally) create a virtualenv:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/charm-explorer-mcp.git
+git clone https://github.com/charmwtf/charm-explorer-mcp.git
 cd charm-explorer-mcp
 
 python -m venv .venv
