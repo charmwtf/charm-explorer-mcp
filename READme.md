@@ -43,7 +43,7 @@ A [Model Context Protocol](https://modelcontextprotocol.io/) server that bridges
 
 ## Requirements
 
-- **Windows** (the server communicates via a Windows named pipe — `\\\\.\\pipe\\charm_explorer_mcp` by default).
+- **Windows** (the server communicates via a Windows named pipe — `\\.\pipe\charm_explorer_mcp` by default).
 - **Python 3.10+**
 - A running instance of the **Charm Explorer native bridge** (`explorer_mcp_bridge.cpp`) attached to the target Roblox process and listening on the configured pipe.
 
@@ -54,11 +54,12 @@ A [Model Context Protocol](https://modelcontextprotocol.io/) server that bridges
 Clone the repo and (optionally) create a virtualenv:
 
 ```bash
-git clone https://github.com/charmwtf/charm-explorer-mcp.git
+git clone [https://github.com/charmwtf/charm-explorer-mcp.git](https://github.com/charmwtf/charm-explorer-mcp.git)
 cd charm-explorer-mcp
 
 python -m venv .venv
-.venv\\Scripts\\activate
+.venv\Scripts\activate
+
 ```
 
 No third-party Python dependencies are required — the server uses only the standard library.
@@ -67,6 +68,7 @@ Verify it runs:
 
 ```bash
 python charm_explorer_mcp.py
+
 ```
 
 It will block waiting for MCP messages on stdin. That's normal — your MCP client will spawn it.
@@ -75,32 +77,33 @@ It will block waiting for MCP messages on stdin. That's normal — your MCP clie
 
 ## Configuration
 
-The server is configured entirely through environment variables (see [Environment Variables](#environment-variables)). The defaults work out of the box if the native bridge uses the default pipe name.
+The server is configured entirely through environment variables (see [Environment Variables](https://www.google.com/search?q=%23environment-variables)). The defaults work out of the box if the native bridge uses the default pipe name.
 
 ---
 
 ## Client Setup
 
-Replace `C:\\\\path\\\	o\\\\charm_explorer_mcp.py` with the absolute path to the script on your machine. Use double backslashes in JSON.
+Replace `C:\\path\\to\\charm_explorer_mcp.py` with the absolute path to the script on your machine. Use double backslashes in JSON.
 
 ### Claude Desktop
 
 Edit your Claude Desktop config:
 
-- **Windows:** `%APPDATA%\\Claude\\claude_desktop_config.json`
+* **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
 
 ```json
 {
   "mcpServers": {
     "charm-explorer": {
       "command": "python",
-      "args": ["C:\\\\path\\\	o\\\\charm_explorer_mcp.py"],
+      "args": ["C:\\path\\to\\charm_explorer_mcp.py"],
       "env": {
-        "CHARM_EXPLORER_PIPE_NAME": "\\\\\\\\.\\\\pipe\\\\charm_explorer_mcp"
+        "CHARM_EXPLORER_PIPE_NAME": "\\\\.\\pipe\\charm_explorer_mcp"
       }
     }
   }
 }
+
 ```
 
 Restart Claude Desktop. The tools will appear under the 🔌 menu.
@@ -114,7 +117,8 @@ Restart Claude Desktop. The tools will appear under the 🔌 menu.
 Add the server via the CLI:
 
 ```bash
-claude mcp add charm-explorer -- python C:\\path\	o\\charm_explorer_mcp.py
+claude mcp add charm-explorer -- python C:\path\to\charm_explorer_mcp.py
+
 ```
 
 Or manually edit `~/.claude.json` / project `.mcp.json`:
@@ -124,10 +128,11 @@ Or manually edit `~/.claude.json` / project `.mcp.json`:
   "mcpServers": {
     "charm-explorer": {
       "command": "python",
-      "args": ["C:\\\\path\\\	o\\\\charm_explorer_mcp.py"]
+      "args": ["C:\\path\\to\\charm_explorer_mcp.py"]
     }
   }
 }
+
 ```
 
 📚 [Claude Code MCP docs](https://docs.claude.com/en/docs/claude-code/mcp)
@@ -141,10 +146,11 @@ Edit `~/.codex/config.toml`:
 ```toml
 [mcp_servers.charm-explorer]
 command = "python"
-args = ["C:\\\\path\\\	o\\\\charm_explorer_mcp.py"]
+args = ["C:\\path\\to\\charm_explorer_mcp.py"]
 
 [mcp_servers.charm-explorer.env]
-CHARM_EXPLORER_PIPE_NAME = "\\\\\\\\.\\\\pipe\\\\charm_explorer_mcp"
+CHARM_EXPLORER_PIPE_NAME = "\\\\.\\pipe\\charm_explorer_mcp"
+
 ```
 
 Then launch Codex normally. Tools will be auto-discovered.
@@ -162,12 +168,13 @@ For **[Cline](https://github.com/cline/cline)** or **[Roo Code](https://github.c
   "mcpServers": {
     "charm-explorer": {
       "command": "python",
-      "args": ["C:\\\\path\\\	o\\\\charm_explorer_mcp.py"],
+      "args": ["C:\\path\\to\\charm_explorer_mcp.py"],
       "disabled": false,
       "autoApprove": []
     }
   }
 }
+
 ```
 
 For **native VS Code MCP support** (`.vscode/mcp.json`):
@@ -178,10 +185,11 @@ For **native VS Code MCP support** (`.vscode/mcp.json`):
     "charm-explorer": {
       "type": "stdio",
       "command": "python",
-      "args": ["C:\\\\path\\\	o\\\\charm_explorer_mcp.py"]
+      "args": ["C:\\path\\to\\charm_explorer_mcp.py"]
     }
   }
 }
+
 ```
 
 📚 [VS Code MCP docs](https://code.visualstudio.com/docs/copilot/chat/mcp-servers)
@@ -197,10 +205,11 @@ Add to `~/.cursor/mcp.json` (or `.cursor/mcp.json` in your project):
   "mcpServers": {
     "charm-explorer": {
       "command": "python",
-      "args": ["C:\\\\path\\\	o\\\\charm_explorer_mcp.py"]
+      "args": ["C:\\path\\to\\charm_explorer_mcp.py"]
     }
   }
 }
+
 ```
 
 📚 [Cursor MCP docs](https://docs.cursor.com/context/model-context-protocol)
@@ -217,11 +226,12 @@ In your Zed `settings.json`:
     "charm-explorer": {
       "command": {
         "path": "python",
-        "args": ["C:\\\\path\\\	o\\\\charm_explorer_mcp.py"]
+        "args": ["C:\\path\\to\\charm_explorer_mcp.py"]
       }
     }
   }
 }
+
 ```
 
 📚 [Zed context servers docs](https://zed.dev/docs/assistant/context-servers)
@@ -231,7 +241,7 @@ In your Zed `settings.json`:
 ## Tools
 
 | Tool | Description |
-|------|-------------|
+| --- | --- |
 | `status` | Get bridge status — DataModel, Players, Workspace, output dir. |
 | `scan_vtable_instances` | Scan process memory for instances whose vtable matches a given address. |
 | `get_instance` | Resolve an instance by path or address; optionally include children. |
@@ -250,12 +260,14 @@ All instance-targeting tools accept either:
 
 ```json
 { "path": "game/Workspace/Baseplate" }
+
 ```
 
 or:
 
 ```json
 { "address": "0x1A2B3C4D5E" }
+
 ```
 
 ---
@@ -263,8 +275,8 @@ or:
 ## Environment Variables
 
 | Variable | Default | Description |
-|----------|---------|-------------|
-| `CHARM_EXPLORER_PIPE_NAME` | `\\\\.\\pipe\\charm_explorer_mcp` | Windows named pipe exposed by the native bridge. |
+| --- | --- | --- |
+| `CHARM_EXPLORER_PIPE_NAME` | `\\.\pipe\charm_explorer_mcp` | Windows named pipe exposed by the native bridge. |
 | `CHARM_EXPLORER_MCP_PROTOCOL_VERSION` | `2024-11-05` | MCP protocol version advertised during `initialize`. |
 
 ---
@@ -275,9 +287,10 @@ or:
 The native bridge isn't running, or it's listening on a different pipe name. Make sure `explorer_mcp_bridge.cpp` is attached to the Roblox process and the `CHARM_EXPLORER_PIPE_NAME` matches.
 
 **Tools don't appear in the client**
-- Check the client's MCP logs (Claude Desktop: `%APPDATA%\\Claude\\logs\\`).
-- Confirm `python` is on your `PATH` — use a full path like `C:\\\\Python312\\\\python.exe` if not.
-- Verify the script path uses escaped backslashes in JSON.
+
+* Check the client's MCP logs (Claude Desktop: `%APPDATA%\Claude\logs\`).
+* Confirm `python` is on your `PATH` — use a full path like `C:\\Python312\\python.exe` if not.
+* Verify the script path uses escaped backslashes in JSON.
 
 **`stream closed before the full payload was read`**
 The bridge crashed or disconnected mid-response. Restart the native bridge.
@@ -289,12 +302,16 @@ That's expected when launched manually — it's waiting for JSON-RPC messages on
 
 ## License
 
-MIT — see [LICENSE](./LICENSE).
+MIT — see [LICENSE](https://www.google.com/search?q=./LICENSE).
 
 ---
 
 ## Related
 
-- [Model Context Protocol Specification](https://spec.modelcontextprotocol.io/)
-- [MCP Servers Repository](https://github.com/modelcontextprotocol/servers)
-- [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk)
+* [Model Context Protocol Specification](https://spec.modelcontextprotocol.io/)
+* [MCP Servers Repository](https://github.com/modelcontextprotocol/servers)
+* [MCP Python SDK](https://github.com/modelcontextprotocol/python-sdk)
+
+```
+
+```
